@@ -18,4 +18,6 @@ public interface ScheduleRepository {
     Schedule findScheduleByIdOrElseThrow(Long id);
 
     int updateNameAndContents(Long id, String name, String contents);
+
+    int deleteSchedule(Long id);
 }

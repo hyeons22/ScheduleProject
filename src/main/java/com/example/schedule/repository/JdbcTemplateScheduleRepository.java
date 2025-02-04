@@ -50,12 +50,12 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository{
 
     @Override
     public List<ScheduleResponseDto> findAllSchedules() {
-        return jdbcTemplate.query("select * from schedule order by desc" , scheduleRowMapper());
+        return jdbcTemplate.query("select * from schedule order by modified_date desc " , scheduleRowMapper());
     }
 
     @Override
     public Optional<Schedule> findScheduleById(Long id) {
-        List<Schedule> result = jdbcTemplate.query("select * from schedule where id = ? order by desc ", scheduleRowMapperV2(), id);
+        List<Schedule> result = jdbcTemplate.query("select * from schedule where id = ?", scheduleRowMapperV2(), id);
         return result.stream().findAny();
     }
 
@@ -68,6 +68,11 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository{
     @Override
     public int updateNameAndContents(Long id, String name, String contents) {
         return jdbcTemplate.update("update schedule set name = ? , contents = ?, modified_date = now() where id = ?", name,contents,id);
+    }
+
+    @Override
+    public int deleteSchedule(Long id) {
+        return jdbcTemplate.update("delete from schedule where id = ?", + id);
     }
 
 

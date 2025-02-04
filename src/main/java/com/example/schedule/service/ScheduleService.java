@@ -16,4 +16,6 @@ public interface ScheduleService {
 
     ScheduleResponseDto updateNameAndContents(Long id, String name, String password, String title, String contents);
 
+    void deleteSchedule(Long id);
+
 }

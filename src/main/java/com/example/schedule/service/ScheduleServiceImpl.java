@@ -52,7 +52,7 @@ public class ScheduleServiceImpl implements ScheduleService{
     @Override
     public ScheduleResponseDto updateNameAndContents(Long id, String name, String password, String title, String contents) {
 
-        if(name == null){
+        if(name == null || contents == null){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The name and content are required values");
         }
 
@@ -64,6 +64,16 @@ public class ScheduleServiceImpl implements ScheduleService{
         Schedule schedule = scheduleRepository.findScheduleByIdOrElseThrow(id);
 
         return new ScheduleResponseDto(schedule);
+    }
+
+    @Override
+    public void deleteSchedule(Long id) {
+
+        int deleteRow = scheduleRepository.deleteSchedule(id);
+
+        if(deleteRow == 0){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id = " + id);
+        }
     }
 
 }
