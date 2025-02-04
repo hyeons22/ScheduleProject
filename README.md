@@ -1,11 +1,11 @@
 ### 일정 API 설계
 |기능  |Method  |URL  |request  |response  |상태코드  |
 |--|----|--|--|--|--|
-|일정 생성  |`POST`|/api/schedules  |요청  |등록 정보  |200:정상등록|
-|전체 일정 조회  |`GET`|/api/schedules/{id}  |요청  |단건 응답 정보  |200:정상조회|
-|선택 일정 조회  |`GET`|/api/schedules  |요청  |다건 응답 정보  |200:정상조회|
-|선택 일정 수정  |`PUT`|/api/schedules/{id}  |요청  |수정정보  |200:정상수정|
-|선택 일정 삭제  |`DELETE`|/api/schedules/{id}  |요청  |-  |200:정상삭제|
+|스케줄 생성  |`POST`|/api/schedules  |요청  |등록 정보  |200:정상등록|
+|스케줄 전체 목록 조회  |`GET`|/api/schedules  |요청  |다건 응답 정보  |200:정상조회|
+|스케줄 단건 목록 조회  |`GET`|/api/schedules/{id}  |요청  |단건 응답 정보  |200:정상조회|
+|스케줄 단건 이름 내용 수정  |`PATCH`|/api/schedules/{id}  |요청  |수정정보  |200:정상수정|
+|스케줄 삭제  |`DELETE`|/api/schedules/{id}  |요청  |-  |200:정상삭제|
 
 
 ### ERD
