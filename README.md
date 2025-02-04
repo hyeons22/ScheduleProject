@@ -8,3 +8,5 @@
 |선택 일정 삭제  |`DELETE`|/api/schedules/{id}  |요청  |-  |200:정상삭제|
 
 
+### ERD
+![image](https://github.com/user-attachments/assets/c8c3afa7-e987-4cd9-9d8b-ba44d39641b3)
