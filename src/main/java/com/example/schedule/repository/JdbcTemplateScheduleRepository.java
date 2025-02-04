@@ -13,6 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,12 +50,12 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository{
 
     @Override
     public List<ScheduleResponseDto> findAllSchedules() {
-        return jdbcTemplate.query("select * from schedule" , scheduleRowMapper());
+        return jdbcTemplate.query("select * from schedule order by desc" , scheduleRowMapper());
     }
 
     @Override
     public Optional<Schedule> findScheduleById(Long id) {
-        List<Schedule> result = jdbcTemplate.query("select * from schedule where id = ?", scheduleRowMapperV2(), id);
+        List<Schedule> result = jdbcTemplate.query("select * from schedule where id = ? order by desc ", scheduleRowMapperV2(), id);
         return result.stream().findAny();
     }
 
@@ -62,6 +63,11 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository{
     public Schedule findScheduleByIdOrElseThrow(Long id) {
         List<Schedule> result = jdbcTemplate.query("select * from schedule where id = ?", scheduleRowMapperV2(), id);
         return result.stream().findAny().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exists id = " + id));
+    }
+
+    @Override
+    public int updateNameAndContents(Long id, String name, String contents) {
+        return jdbcTemplate.update("update schedule set name = ? , contents = ?, modified_date = now() where id = ?", name,contents,id);
     }
 
 
